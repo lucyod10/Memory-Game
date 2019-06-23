@@ -189,7 +189,7 @@ function newDeck (numberOfCards) {
 	cards.setAttribute("cardId", id);
 	cards.setAttribute("name", "notFlipped");
 	//add URL to image to populate the board
-	cards.setAttribute("src", "images/back_03.jfif");
+	cards.setAttribute("src", "images/back_03.jpg");
 	cardHolder.setAttribute("class", "cardHolder")
 	cardBoard.appendChild(cardHolder);
 	cardHolder.appendChild(cards);
@@ -333,7 +333,7 @@ function noMatch () {
 		//let cardId = cardElement[i].getAttribute('data-id');
 		if (cardElement[i].name === "flipped")
 		{
-			cardElement[i].setAttribute('src', "images/back_03.jfif");
+			cardElement[i].setAttribute('src', "images/back_03.jpg");
 			cardElement[i].setAttribute('name', "notFlipped");
 		}
 	}

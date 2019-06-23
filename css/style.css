@@ -1,0 +1,150 @@
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: #131313;
+	font-family: 'Montserrat', sans-serif;
+	color: white;
+}
+
+h1 {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+	font-size: 37px;
+	text-align: center;
+	padding: 10px 0px;
+	margin: 0;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+header {
+	background-color: none;
+	padding: 10px;
+	margin: 0 auto;
+}
+
+main {
+	background-color: none;
+	width: calc(50% - 20px);
+	margin: 0 auto;
+	text-align: center;
+
+}
+
+input, 
+button {
+	background-color: white;
+	color: #12172f;
+	padding: 8px 12px;
+	font-family: 'Montserrat', sans-serif;
+	border: 1px solid #0c0f1f;
+	font-size: 16px;
+	text-transform: uppercase;
+}
+
+button {
+	background-color: #ffcc00;
+}
+
+input {
+	width: 120px;
+}
+
+.cardHolder {
+	width: 20%;
+	height: 0px;
+	padding-top: 20%;
+	position: relative;
+}
+
+.card {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: calc(100% - 10px);
+	height: calc(100% - 10px);
+	object-fit: cover;
+	border-radius: 15px;
+	margin: 5px;
+}
+
+#cardBoard {
+	background-color: white;
+	margin-top: 70px;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 10px;
+	border-radius: 15px;
+	justify-content: center;
+}
+
+.score {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 22px;
+		letter-spacing: 2px;
+
+}
+
+#score {
+	font-weight: 700;
+	color: #ffcc00;
+
+}
+
+@media screen and (max-width: 1000px) {
+	body {
+		background-color: indigo;
+	}
+
+	main {
+		width: 60%;
+	}
+
+	.card {
+		border-radius: 12px;
+	}
+
+	.cardHolder {
+		width: 25%;
+		padding-top: 25%;
+	}
+
+}
+
+@media screen and (max-width: 700px) {
+	body {
+		background-color: indigo;
+	}
+
+	main {
+		width: 70%;
+	}
+
+	.card {
+		border-radius: 9px;
+	}
+
+	.cardHolder {
+		width: 33%;
+		padding-top: 33%;
+	}
+
+}
+
+@media screen and (max-width: 500px) {
+	body {
+		background-color: red;
+	}
+
+	main {
+		width: 100%;
+	}
+
+	.card {
+		border-radius: 5px;
+	}
+
+}
+

@@ -166,15 +166,18 @@ function newDeck (numberOfCards) {
 
  function addDeck () {
  	const cardHolder = document.createElement("div");
-	const cards = document.createElement("img");
-	cards.setAttribute("class", "card");
+ 	const cardHolder2 = document.createElement("div");
+	const cardfront = document.createElement("img");
+	const cardback = document.createElement("img");
+	cardfront.setAttribute("class", "card front");
+	cardback.setAttribute("class", "card back");
 	//when a card is clicked, fire flipCard
 	let randomImage = randomiseImage();
 	/*
 	let URL = randomImage.URL;
 	let type = randomImage.type;
 	*/
-	cards.addEventListener('click', flipCard);
+	cardHolder2.addEventListener('click', flipCard);
 	/*
 	//add URL to image to populate the board
 	let URL = randomiseImage().URL;
@@ -186,13 +189,19 @@ function newDeck (numberOfCards) {
 	cards.setAttribute("type", type);
 	*/
 	let id = randomImage.cardId;
-	cards.setAttribute("cardId", id);
-	cards.setAttribute("name", "notFlipped");
+	cardHolder2.setAttribute("cardId", id);
+	let image = imageObjects[id].URL;
+	cardfront.setAttribute("src", image);
+	cardHolder2.setAttribute("name", "notFlipped");
 	//add URL to image to populate the board
-	cards.setAttribute("src", "images/back_03.jpg");
-	cardHolder.setAttribute("class", "cardHolder")
+	cardback.setAttribute("src", "images/back_03.jpg");
+	
+	cardHolder.setAttribute("class", "cardHolder");
 	cardBoard.appendChild(cardHolder);
-	cardHolder.appendChild(cards);
+	cardHolder2.setAttribute("class", "cardHolder2 rotate");
+	cardHolder.appendChild(cardHolder2);
+	cardHolder2.appendChild(cardfront);
+	cardHolder2.appendChild(cardback);
  }
 
 function randomiseImage () {
@@ -259,14 +268,20 @@ function flipCard () {
 	
 	let cardID = this.getAttribute('cardId');
 	let card = imageObjects[cardID];
+	
 	//check if the card has not already been flipped
 	if (this.getAttribute('name') === "notFlipped")
 	{
 		//set it to flipped
 		this.setAttribute('name', "flipped");
+
 		//add URL to image to populate the board
+		/*
 		let URL = card.URL;
 		this.setAttribute("src", URL);
+		*/
+		//flip card
+		animateFlip(this);
 		//assign type to use in checkForMatch
 		let type = card.type;
 		cardsInPlay.push(card);
@@ -289,7 +304,7 @@ function flipCard () {
 function checkForMatch () {
 	if (cardsInPlay[0].type === cardsInPlay[1].type) 
 	{
-		let allCards = document.getElementsByClassName("card");
+		let allCards = document.getElementsByClassName("cardHolder2");
 		let id0 = cardsInPlay[0].cardId;
 		let id1 = cardsInPlay[1].cardId;
 		for (let i = 0; i < allCards.length; i++) {
@@ -298,12 +313,17 @@ function checkForMatch () {
 				if (allCards[i].getAttribute("cardid") == id0 || allCards[i].getAttribute("cardid") == id1) {
 					//make matched
 					allCards[i].setAttribute("name", "matched");
+					//allCards[i].classList.add("match");
+					animateMatch(allCards[i]);
+					//TODO play matched animation
+					//allCards[i].parentNode.classList.add("match");
 				}
 			} 
 		}
 
+
 		correctSound.play();
-		alert("You found a match!");
+		//alert("You found a match!");
 		//add score
 		var score = document.getElementById('score');
 		score.innerHTML = parseInt(score.textContent) + 1;
@@ -313,7 +333,8 @@ function checkForMatch () {
 	else 
 	{
 		noMatch();
-		alert("Sorry, try again.");
+
+		//alert("Sorry, try again.");
 		
 	}
 	clearCardsInPlay();
@@ -323,20 +344,46 @@ function clearCardsInPlay () {
 	cardsInPlay = [];
 }
 
+function toggleClass(object, className) {
+	if (object.classList.contains(className)) 
+	{
+		object.classList.toggle(className);
+	}
+}
+
 function noMatch () {
 	errorSound.play();
-	//find original card objects
-	//loop through the cards on the board for their ID's, 
-	//then if it matches the cardsInPlay ID, then reset image
-	let cardElement = document.getElementsByClassName('card');
-	for (let i = 0; i < cardElement.length; i++) {
-		//let cardId = cardElement[i].getAttribute('data-id');
-		if (cardElement[i].name === "flipped")
-		{
-			cardElement[i].setAttribute('src', "images/back_03.jpg");
-			cardElement[i].setAttribute('name', "notFlipped");
+
+	let allCards = document.getElementsByClassName("cardHolder2");
+		
+		for (let i = 0; i < allCards.length; i++) {
+			//of these, which are also flipped
+			if (allCards[i].getAttribute("name") === "flipped") {
+
+				animateShake(allCards[i]);
+				
+				//wrap the function animateFlip in a new function,
+				//because otherwise animateFlip is executed, before the timeout
+				//and the "allCards" is executed after the timeout
+				//which causes the animations to play at the same time
+				setTimeout(
+					function() {
+						animateFlip(allCards[i])	
+					}, 500);
+				
+				//make notFlipped so it can be reset for next match
+				allCards[i].setAttribute('name', "notFlipped");
+				//timeout to let animations complete, then reset all classes
+				//for next match
+				setTimeout(
+					function() {
+						toggleClass(allCards[i], "bounce");
+						toggleClass(allCards[i], "shake");
+						
+					}, 1000);
+
+			} 
 		}
-	}
 }
 
 function resetGame () {
@@ -386,5 +433,18 @@ var correctSound = new sound("audio/correct2.mp3");
 
 document.getElementById('reset').addEventListener('click', resetGame);
 
+
+function animateFlip (card) {
+	card.classList.toggle("rotate");
+
+}
+
+function animateMatch (card) {
+	card.classList.toggle("bounce");
+}
+
+function animateShake (card) {
+	card.classList.toggle("shake");
+}
 
 newDeck(10);

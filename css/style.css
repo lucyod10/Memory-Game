@@ -1,3 +1,5 @@
+/* general */
+
 html {
 	scroll-behavior: smooth;
 }
@@ -6,6 +8,8 @@ body {
 	background-color: #131313;
 	font-family: 'Montserrat', sans-serif;
 	color: white;
+	font-size: 15px;
+	letter-spacing: 2px;
 }
 
 h1 {
@@ -13,16 +17,33 @@ h1 {
 	font-weight: 500;
 	font-size: 37px;
 	text-align: center;
-	padding: 10px 0px;
-	margin: 0;
+	padding: 10px 0px 0px 0px;
+	margin: 0 auto;
 	letter-spacing: 2px;
 	text-transform: uppercase;
+	border-bottom: 8px solid #ffcc00;
+	display: inline-block;
+}
+
+h2 {
+	border-bottom: 8px solid #292929;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+	font-size: 24px;
+	text-align: center;
+	padding: 3px 0px 0px 0px;
+	margin: 10px auto;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	display: inline-block;
 }
 
 header {
+	text-align:center;
 	background-color: none;
 	padding: 10px;
 	margin: 0 auto;
+	margin-bottom: 20px;
 }
 
 main {
@@ -33,7 +54,9 @@ main {
 
 }
 
-input, 
+/* inputs */
+
+input,
 button {
 	background-color: white;
 	color: #12172f;
@@ -48,12 +71,76 @@ button {
 	background-color: #ffcc00;
 }
 
-input {
+input[id="numberOfCards"] {
 	width: 120px;
 }
 
+.score, 
+.moves, 
+.won {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 17px;
+	letter-spacing: 2px;
+	margin: 0;
+}
+
+#score,
+#moves,
+#won {
+	font-weight: 700;
+	color: #ffcc00;
+}
+
+.radiocontainer {
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 17px;
+	user-select: none;
+	padding-left: 30px;
+	padding-bottom: 10px;
+}
+
+.radiocontainer input {
+	display:none;
+}
+
+.radiocontainer .circle {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-color: #292929;
+	position: absolute;
+	left: 0;
+	top: 0;
+	border-radius: 50%;
+
+}
+
+.radiocontainer:hover .circle {
+	background-color: #ffcc00;
+}
+
+.radiocontainer input:checked + .circle {
+	background-color: #292929;
+}
+
+.radiocontainer input:checked + .circle:after {
+	content: "";
+	height: 10px;
+	width: 10px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 50%;
+	position: absolute;
+	background-color: #ffcc00;
+}
+
+/* animation */
+
 @keyframes matched {
-  /* declare animation actions here */
   0% 100% {
   	width: 100%;
     height: 100%;
@@ -87,7 +174,6 @@ input {
 }
 
 @keyframes shake {
-  /* declare animation actions here */
   0% 100% {
     transform: rotateZ(00deg);
   }
@@ -102,39 +188,36 @@ input {
 }
 
 .match {
-	/* animate the matched cards */
 	animation-name: matched;
-  	animation-duration: 0.3s; 
-	animation-timing-function: linear; 
+  	animation-duration: 0.3s;
+	animation-timing-function: linear;
 	animation-delay: 0s;
 	animation-direction: alternate;
 	animation-iteration-count: 1;
 	animation-fill-mode: none;
-	animation-play-state: running; 
+	animation-play-state: running;
 }
 
 .bounce {
-		/* animate the matched cards */
 	animation-name: bounce;
-  	animation-duration: 0.5s; 
-	animation-timing-function: linear; 
+  	animation-duration: 0.5s;
+	animation-timing-function: linear;
 	animation-delay: 0s;
 	animation-direction: alternate;
 	animation-iteration-count: 1;
 	animation-fill-mode: none;
-	animation-play-state: running; 
+	animation-play-state: running;
 }
 
 .shake {
-		/* animate the matched cards */
 	animation-name: shake;
-  	animation-duration: 0.3s; 
-	animation-timing-function: ease-in-out; 
+  	animation-duration: 0.3s;
+	animation-timing-function: ease-in-out;
 	animation-delay: 0s;
 	animation-direction: alternate;
 	animation-iteration-count: 1;
 	animation-fill-mode: none;
-	animation-play-state: running; 
+	animation-play-state: running;
 }
 
 .cardHolder {
@@ -169,7 +252,7 @@ input {
 	object-fit: cover;
 	border-radius: 15px;
 	backface-visibility: hidden;
-	
+
 }
 
 .front {
@@ -190,22 +273,25 @@ input {
 	justify-content: center;
 }
 
-.score {
+.winnertxt {
+	color: #131313;
 	font-family: 'Montserrat', sans-serif;
-	font-size: 22px;
-		letter-spacing: 2px;
-
+	text-transform: uppercase;
+	font-size: 40px;
 }
 
-#score {
-	font-weight: 700;
-	color: #ffcc00;
-
+.winner {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 10px;
 }
+
+/* responsive */
 
 @media screen and (max-width: 1000px) {
 	body {
-		background-color: #292929;
+		/*background-color: #292929;*/
 	}
 
 	main {
@@ -225,7 +311,7 @@ input {
 
 @media screen and (max-width: 700px) {
 	body {
-		background-color: #424242;
+		/*background-color: #424242;*/
 	}
 
 	main {
@@ -245,7 +331,7 @@ input {
 
 @media screen and (max-width: 500px) {
 	body {
-		background-color: #5a5a5a;
+		/*background-color: #5a5a5a;*/
 	}
 
 	main {
@@ -257,4 +343,3 @@ input {
 	}
 
 }
-

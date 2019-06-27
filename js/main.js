@@ -495,10 +495,26 @@ function sound(src) {
   }
 }
 
+
 var errorSound = new sound("audio/wrong3.mp3");
 var correctSound = new sound("audio/correct2.mp3");
 
+function instHide () {
+	let instructions = document.getElementById("instructions");
+	if (instructions.clientHeight) {
+      instructions.style.height = 0;
+    } else {
+      instructions.style.height = instructions.scrollHeight + "px";
+    }
+    let icon = document.getElementById("instClick").innerHTML;
+    //console.log(icon);
+    icon = (icon === "+") ? "-" : "+";
+    document.getElementById("instClick").innerHTML = icon;
+
+}
+
 document.getElementById('reset').addEventListener('click', resetGame);
+document.getElementById('instClick').addEventListener('click', instHide);
 
 
 function animateFlip (card) {
@@ -515,3 +531,10 @@ function animateShake (card) {
 }
 
 newDeck(10);
+
+//TODO score from numcards
+//TODO login form
+//TODO write script to find image groups
+//TODO hide/show instructions
+//TODO animate radio buttons
+//TODO animate cards out

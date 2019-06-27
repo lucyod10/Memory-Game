@@ -118,24 +118,44 @@ input[id="numberOfCards"] {
 
 }
 
-.radiocontainer:hover .circle {
+.radiocontainer .highlight {
 	background-color: #ffcc00;
-}
-
-.radiocontainer input:checked + .circle {
-	background-color: #292929;
-}
-
-.radiocontainer input:checked + .circle:after {
 	content: "";
-	height: 10px;
-	width: 10px;
-	left: 50%;
-	top: 50%;
+	height: 18px;
+	width: 18px;
+	left: 1px;
+	top: 1px;
 	transform: translate(-50%, -50%);
 	border-radius: 50%;
 	position: absolute;
+	transform: scale(0, 0);
+
+	transition: all 0.2s;
+}
+
+.radiocontainer:hover .highlight {
+	transform: scale(1, 1);
+	
+}
+
+.radiocontainer input:checked + .circle {
 	background-color: #ffcc00;
+}
+
+@keyframes bloop {
+	0% {
+		background-color: #292929;
+		transform: scale(0, 0);
+
+	}
+
+	100% {
+		background-color: #ffcc00;
+		transform: scale(1, 1);
+
+
+	}
+
 }
 
 /* animation */
@@ -285,6 +305,20 @@ input[id="numberOfCards"] {
 	height: 100%;
 	object-fit: cover;
 	border-radius: 10px;
+}
+
+/* instructions */
+
+#instClick {
+	border: none;
+	margin-left: 30px;
+	cursor: pointer;
+}
+
+.inst {
+	height: 0;
+	overflow: hidden;
+	transition: all 0.3s;
 }
 
 /* responsive */

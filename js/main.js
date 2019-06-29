@@ -1,4 +1,6 @@
+// Card Objects ////////////////////////////////////////////////////////////////
 const imageObjects = [
+//puppy
 {
 	type: "puppy",
 	URL: "images/puppy_01.jfif"
@@ -31,8 +33,7 @@ const imageObjects = [
 	type: "puppy",
 	URL: "images/puppy_08.jfif"
 },
-
-
+//deer
 {
 	type: "deer",
 	URL: "images/deer_01.jfif"
@@ -41,7 +42,7 @@ const imageObjects = [
 	type: "deer",
 	URL: "images/deer_02.jfif"
 },
-
+//panda
 {
 	type: "panda",
 	URL: "images/panda_01.jfif"
@@ -50,7 +51,7 @@ const imageObjects = [
 	type: "panda",
 	URL: "images/panda_02.jfif"
 },
-
+//bear
 {
 	type: "bear",
 	URL: "images/bear_01.jfif"
@@ -59,7 +60,7 @@ const imageObjects = [
 	type: "bear",
 	URL: "images/bear_02.jfif"
 },
-
+//kitten
 {
 	type: "kitten",
 	URL: "images/cat_01.jfif"
@@ -76,8 +77,7 @@ const imageObjects = [
 	type: "kitten",
 	URL: "images/cat_04.jfif"
 },
-
-
+//duck
 {
 	type: "duck",
 	URL: "images/duck_01.jfif"
@@ -86,7 +86,7 @@ const imageObjects = [
 	type: "duck",
 	URL: "images/duck_02.jfif"
 },
-
+//otter
 {
 	type: "otter",
 	URL: "images/otter_01.jfif"
@@ -95,8 +95,9 @@ const imageObjects = [
 	type: "otter",
 	URL: "images/otter_02.jfif"
 }
-
 ];
+
+// Game Board //////////////////////////////////////////////////////////////////
 
 const cardBoard = document.getElementById("cardBoard");
 let newDeckArray = [];
@@ -105,6 +106,7 @@ let cardsAlreadyPlaced = [];
 console.log("up and running");
 let cardsInPlay = [];
 let mode = "exactMatch";
+let globCardNum = 0;
 
 function addIds () {
 	for (let i = 0; i < imageObjects.length; i++) {
@@ -113,7 +115,7 @@ function addIds () {
 }
 
 function newDeck (numberOfCards) {
-
+	globCardNum = numberOfCards;
 	addIds();
 
  	for (let i=0; i < numberOfCards; i++) {
@@ -163,6 +165,8 @@ function newDeck (numberOfCards) {
 		//populate cards on board with random values from newDeckArray
 		addDeck();
 	}
+
+	interval = setInterval(setTime, 1000);
  }
 
  function addDeck () {
@@ -265,15 +269,14 @@ function randomisePairs (randomTypeOfCard) {
 	else {
 		newDeckArray.push(allObjectsOfType[randomNum1]);
 	}
-
 }
-
 
 
 function flipCard () {
 
+	updateStars();
+
 	//turn card around to correct URL
-	
 	let cardID = this.getAttribute('cardId');
 	let card = imageObjects[cardID];
 	
@@ -317,13 +320,11 @@ function checkForMatch () {
 	//if mode is species, only check for type
 	//if mode is exactMatch, check for URL to match
 	if (((cardsInPlay[0].type === cardsInPlay[1].type) && 
-		(mode === "species")
-		) ||
+		(mode === "species")) ||
 		((cardsInPlay[0].URL === cardsInPlay[1].URL) &&
 		(mode === "exactMatch")))
 	{
 		const allCards = document.getElementsByClassName("cardHolder2");
-
 		const id0 = cardsInPlay[0].cardId;
 		const id1 = cardsInPlay[1].cardId;
 		//loop all cards
@@ -341,11 +342,9 @@ function checkForMatch () {
 		}
 
 		correctSound.play();
-
 		//add score
 		const score = document.getElementById('score');
 		score.innerHTML = parseInt(score.textContent) + 1;
-
 		let allMatchedCards = [];
 		//check if last match, then Win!
 		for (let i = 0; i < allCards.length; i++) {
@@ -358,7 +357,6 @@ function checkForMatch () {
 		}
 		if (allMatchedCards.length === allCards.length) {
 			setTimeout(finishGame, 500);
-			//finishGame();
 			console.log("winner!");
 		}
 		
@@ -383,15 +381,11 @@ function toggleClass(object, className) {
 
 function noMatch () {
 	errorSound.play();
-
 	let allCards = document.getElementsByClassName("cardHolder2");
-		
 		for (let i = 0; i < allCards.length; i++) {
 			//of these, which are also flipped
 			if (allCards[i].getAttribute("name") === "flipped") {
-
 				animateShake(allCards[i]);
-				
 				//wrap the function animateFlip in a new function,
 				//because otherwise animateFlip is executed, before the timeout
 				//and the "allCards" is executed after the timeout
@@ -409,18 +403,15 @@ function noMatch () {
 					function() {
 						toggleClass(allCards[i], "bounce");
 						toggleClass(allCards[i], "shake");
-						
 					}, 1000);
-
 			} 
 		}
 }
 
-
-
 function resetGame () {
+	stopTime();
 	clearBoard();
-	
+	resetScores();
 	let radioBtn = document.querySelectorAll('input[name="mode"]');
 	for (let i=0; i < radioBtn.length; i++) {
 		if (radioBtn[i].checked)
@@ -442,17 +433,13 @@ function resetGame () {
 	}
 
 	newDeck(input);
+
 }
 
 function clearBoard() {
 	//reset the game
 	//clear list
 	clearCardsInPlay();
-	//reset scores and moves
-	const score = document.getElementById('score');
-	score.innerHTML = "0";
-	const moves = document.getElementById('moves');
-	moves.innerHTML = "0";
 	//Remove played cards
 
 	while (cardBoard.firstChild) {
@@ -460,15 +447,38 @@ function clearBoard() {
 	}
 }
 
+function resetScores () {
+	//reset scores and moves
+	const score = document.getElementById('score');
+	score.innerHTML = "0";
+	const moves = document.getElementById('moves');
+	moves.innerHTML = "0";
+}
+
 function finishGame () {
 	clearBoard();
+	
+	
 	//change won games score
 	const wontxt = document.getElementById('won');
 	wontxt.innerHTML = parseInt(wontxt.textContent) + 1;
+	
 	//make winner text
 	const winnertxt = document.createElement("div");
 	winnertxt.setAttribute("class", "winnertxt");
-	winnertxt.textContent = "you won!";
+	winnertxt.innerHTML = `you won! <br>
+	<span class="winnersmall">
+	Your time was: ${min.textContent}:${sec.textContent}
+	<br>
+	Your score was: ${document.getElementById('score').textContent}
+	<br>
+	${document.getElementById("stars").innerHTML}
+	<br>
+	You made ${document.getElementById('moves').textContent} moves
+	</span>
+	`;
+	stopTime();
+	resetScores();
 
 	//make winner image
 	const winnerImg = document.createElement("img");
@@ -477,9 +487,10 @@ function finishGame () {
 	cardBoard.appendChild(winnertxt);
 	cardBoard.appendChild(winnerImg);
 	
+	
 }
 
-
+// Audio ///////////////////////////////////////////////////////////////////////
 function sound(src) {
   this.sound = document.createElement("audio");
   this.sound.src = src;
@@ -499,6 +510,7 @@ function sound(src) {
 var errorSound = new sound("audio/wrong3.mp3");
 var correctSound = new sound("audio/correct2.mp3");
 
+// Instructions hide menu //////////////////////////////////////////////////////
 function instHide () {
 	let instructions = document.getElementById("instructions");
 	if (instructions.clientHeight) {
@@ -516,7 +528,7 @@ function instHide () {
 document.getElementById('reset').addEventListener('click', resetGame);
 document.getElementById('instClick').addEventListener('click', instHide);
 
-
+// Animations //////////////////////////////////////////////////////////////////
 function animateFlip (card) {
 	card.classList.toggle("rotate");
 
@@ -530,6 +542,65 @@ function animateShake (card) {
 	card.classList.toggle("shake");
 }
 
+//Timer ////////////////////////////////////////////////////////////////////////
+const min = document.getElementById("min");
+const sec = document.getElementById("sec");
+let totalSeconds = 0;
+
+function setTime () {
+	++totalSeconds;
+	sec.innerHTML = pad(totalSeconds % 60);
+	min.innerHTML = pad(parseInt(totalSeconds / 60));
+}
+
+function stopTime () {
+	clearInterval(interval);
+	totalSeconds = 0;
+	sec.innerHTML = "00";
+	min.innerHTML = "00";
+}
+function pad(val) {
+	let valString = val.toString();
+	if (valString.length < 2) {
+		return "0" + valString;
+	}
+	else {
+		return valString;
+	}
+}
+
+let interval;
+
+//Stars score //////////////////////////////////////////////////////////////////
+
+function updateStars () {
+	const stars = document.getElementById("stars");
+	const moves = document.getElementById("moves").textContent;
+	const rating = moves / (globCardNum * 3) * 100;
+	console.log("stars " + stars);
+	console.log("moves " + moves);
+	console.log("globCardNum " + globCardNum);
+	console.log("rating " + rating);
+
+	if (rating <= 25 || moves === 0) {
+		stars.innerHTML = "&#9733;&#9733;&#9733;";
+	}
+	else if (rating <= 50) {
+		stars.innerHTML = "&#9733;&#9733;&#9734;";
+	}
+	else if (rating <= 75) {
+		stars.innerHTML = "&#9733;&#9734;&#9734;";
+	}
+	else if (rating <= 100) {
+		stars.innerHTML = "&#9734;&#9734;&#9734;";
+	}
+	else {
+		stars.innerHTML = "&#9760;&#9760;&#9760;";
+	}
+}
+
+
+// start Game //////////////////////////////////////////////////////////////////
 newDeck(10);
 
 //TODO score from numcards
@@ -538,3 +609,9 @@ newDeck(10);
 //TODO hide/show instructions
 //TODO animate radio buttons
 //TODO animate cards out
+//TODO Leaderboard
+//TODO keyboard shortcuts to improve gameplay
+//TODO collapse new game bucket to just show new game button
+
+//TODO change newgame button to restart when game is playing
+//TODO Readme

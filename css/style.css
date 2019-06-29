@@ -1,5 +1,4 @@
 /* general */
-
 html {
 	scroll-behavior: smooth;
 }
@@ -38,6 +37,19 @@ h2 {
 	display: inline-block;
 }
 
+.h2 {
+	border-bottom: 5px solid #292929;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+	font-size: 20px;
+	text-align: center;
+	margin: 0 auto;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	display: inline-block;
+	margin-bottom: 20px;
+}
+
 header {
 	text-align:center;
 	background-color: none;
@@ -51,11 +63,9 @@ main {
 	width: calc(50% - 20px);
 	margin: 0 auto;
 	text-align: center;
-
 }
 
 /* inputs */
-
 input,
 button {
 	background-color: white;
@@ -72,12 +82,21 @@ button {
 }
 
 input[id="numberOfCards"] {
-	width: 120px;
+	width: 80px;
+	margin: 10px auto;
+
 }
 
-.score, 
-.moves, 
-.won {
+.newGame {
+	border-radius: 20px;
+	background-color: #1b1b1b;
+	width: auto;
+	height: auto;
+	display: inline-block;
+	padding: 10px;
+}
+
+.gameStats {
 	font-family: 'Montserrat', sans-serif;
 	font-size: 17px;
 	letter-spacing: 2px;
@@ -86,9 +105,15 @@ input[id="numberOfCards"] {
 
 #score,
 #moves,
-#won {
+#won,
+#timer,
+#stars {
 	font-weight: 700;
 	color: #ffcc00;
+}
+
+#stars {
+	font-size: 20px;
 }
 
 .radiocontainer {
@@ -115,7 +140,6 @@ input[id="numberOfCards"] {
 	left: 0;
 	top: 0;
 	border-radius: 50%;
-
 }
 
 .radiocontainer .highlight {
@@ -129,82 +153,76 @@ input[id="numberOfCards"] {
 	border-radius: 50%;
 	position: absolute;
 	transform: scale(0, 0);
-
 	transition: all 0.2s;
 }
 
 .radiocontainer:hover .highlight {
 	transform: scale(1, 1);
-	
 }
 
 .radiocontainer input:checked + .circle {
 	background-color: #ffcc00;
 }
 
+/* animation */
 @keyframes bloop {
 	0% {
 		background-color: #292929;
 		transform: scale(0, 0);
-
 	}
 
 	100% {
 		background-color: #ffcc00;
 		transform: scale(1, 1);
-
-
 	}
-
 }
-
-/* animation */
 
 @keyframes matched {
   0% 100% {
   	width: 100%;
     height: 100%;
   }
+
   20%, 70% {
   	width: 90%;
 	height: 90%;
   }
+
   50% {
   	width: 110%;
     height: 110%;
   }
-
 }
-
 
 @keyframes bounce {
   0% 100% {
   	transform-origin: center;
   	transform: scale(1);
   }
+
   20%, 70% {
   	transform-origin: center;
   	transform: scale(1.1);
   }
+
   50% {
   	transform-origin: center;
   	transform: scale(0.9);
   }
-
 }
 
 @keyframes shake {
   0% 100% {
     transform: rotateZ(00deg);
   }
+
   2% {
 	transform: rotateZ(6deg);
   }
+
   75% {
 	transform: rotateZ(-6deg);
   }
-
-
 }
 
 .match {
@@ -262,7 +280,6 @@ input[id="numberOfCards"] {
 	transform: rotateY(180deg);
 }
 
-
 .card {
 	position: absolute;
 	left: 0;
@@ -272,7 +289,6 @@ input[id="numberOfCards"] {
 	object-fit: cover;
 	border-radius: 15px;
 	backface-visibility: hidden;
-
 }
 
 .front {
@@ -300,6 +316,13 @@ input[id="numberOfCards"] {
 	font-size: 40px;
 }
 
+.winnersmall {
+	color: #131313;
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	font-size: 25px;
+}
+
 .winner {
 	width: 100%;
 	height: 100%;
@@ -308,7 +331,6 @@ input[id="numberOfCards"] {
 }
 
 /* instructions */
-
 #instClick {
 	border: none;
 	margin-left: 30px;
@@ -322,12 +344,7 @@ input[id="numberOfCards"] {
 }
 
 /* responsive */
-
 @media screen and (max-width: 1000px) {
-	body {
-		/*background-color: #292929;*/
-	}
-
 	main {
 		width: 60%;
 	}
@@ -340,14 +357,9 @@ input[id="numberOfCards"] {
 		width: 25%;
 		padding-top: 25%;
 	}
-
 }
 
 @media screen and (max-width: 700px) {
-	body {
-		/*background-color: #424242;*/
-	}
-
 	main {
 		width: 70%;
 	}
@@ -360,14 +372,9 @@ input[id="numberOfCards"] {
 		width: 33%;
 		padding-top: 33%;
 	}
-
 }
 
 @media screen and (max-width: 500px) {
-	body {
-		/*background-color: #5a5a5a;*/
-	}
-
 	main {
 		width: 100%;
 	}
@@ -375,5 +382,4 @@ input[id="numberOfCards"] {
 	.card {
 		border-radius: 5px;
 	}
-
 }

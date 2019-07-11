@@ -4,63 +4,62 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Memory Game</title>
 	<meta charset="UTF-8">
+	<script src="https://kit.fontawesome.com/501798d20d.js"></script>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500|Rubik:400,400i,700&display=swap" rel="stylesheet">
 
+
 </head>
 <body>
+	<div class="palette">
+		<div id="paletteBlack" class="black"></div>
+		<div id="paletteYellow" class="yellow"></div>
+		<div id="paletteBlue" class="blue"></div>
+	</div>
 
-<header>
-	<h1>Memory Game</h1>
-</header>
+<div class="wrapper">
 
-<main>
-	<h2>Instructions</h2> <h2 id="instClick">+</h2>
-		<p id="instructions" class="inst">Concentration, also known as Match Match, Memory, Pelmanism, Shinkei-suijaku, Pexeso or simply Pairs, is a card game in which all of the cards are laid face fown on a surgace and two cards are flipped face up over each turn. The object of the game is to turn over pairs of patching cards.</p>
-	<h2>Game</h2>
-	<p class="gameStats">
-		time: <span id="timer"><label id="min">00</label>:<label id="sec">00</label></span>
-	</p>
-	<p class="gameStats">
-		no. of moves: <span id="moves">0</span>
-	</p>
-	<p class="gameStats">
-		current score: <span id="score">0</span>
-	</p>
-	<p class="gameStats">
-		current score: <span id="stars">&#9733;&#9733;&#9733;</span>
-	</p>
-	<p class="gameStats">
-		games won: <span id="won">0</span>
-	</p>
+	<main>
+		<h1>Memory</h1>
+		<h2>more</h2><h2 id="instClick">+</h2>
+			<p id="instructions" class="inst">Concentration, also known as Match Match, Memory, Pelmanism, Shinkei-suijaku, Pexeso or simply Pairs, is a card game in which all of the cards are laid face fown on a surgace and two cards are flipped face up over each turn. The object of the game is to turn over pairs of patching cards.</p>
 
-	<p class="newGame">
-		<span class="h2">New Game</span><br />
+		<p class="gameStats">
+			<span class="statsLabel">time</span><span id="timer"><label id="min">00</label>:<label id="sec">00</label></span>
+		</p>
+		<p class="gameStats">
+			<span class="statsLabel"># moves</span><span id="moves">0</span>
+		</p>
+		<p class="gameStats">
+			<span class="statsLabel">score</span><span id="stars">&#9733;&#9733;&#9733;</span>
+		</p>
+		<p class="gameStats">
+			<span class="statsLabel"># games won</span><span id="won">0</span>
+		</p>
 
-		<label class="radiocontainer">
-			<input type="radio" name="mode"value="species">Match Species
-			<span class="circle"><span class="highlight"></span></span>
-		</label>
+		<p class="newGame">
+			<span class="h2">New game</span><button id="reset"><i class="fas fa-paper-plane"></i></button><br>
+			<span class="statsLabel">type of match</span>
+			<label class="radiocontainer">
+				<input type="radio" name="mode" value="species">SPECIES
+				<span class="circle"><span class="highlight"></span></span>
+			</label>
 
-		<label class="radiocontainer">
-			<input type="radio" name="mode"value="exactMatch" checked="true">Exact Match
-			<span class="circle"><span class="highlight"></span></span>
-		</label>
+			<label class="radiocontainer">
+				<input type="radio" name="mode"value="exactMatch" checked="true">EXACT
+				<span class="circle"><span class="highlight"></span></span>
+			</label>
 
-		<br />
-		<input id="numberOfCards" placeholder="8 cards">
-		<br />
-		<button id="reset">New Game</button>
-	</p>
 
+			<span class="statsLabel"># cards</span>
+			<input id="numberOfCards" placeholder="8">
+		</p>
+	</main>
 
 	<div id="cardBoard">
 	</div>
-</main>
 
-<footer>
-
-</footer>
+</div><!--wrapper -->
 <script src="js/main.js"></script>
 </body>
 </html>

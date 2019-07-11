@@ -130,7 +130,7 @@ function newDeck (numberOfCards) {
 			const min = 0;
 			const max = 7;
 			let randomNum = Math.floor(Math.random() * max);
-			switch(randomNum) 
+			switch(randomNum)
 			{
 				case 0:
 					randomType = "puppy";
@@ -160,7 +160,7 @@ function newDeck (numberOfCards) {
 		}
 	}
 
-	for (let i=0; i < numberOfCards; i++) 
+	for (let i=0; i < numberOfCards; i++)
 	{
 		//populate cards on board with random values from newDeckArray
 		addDeck();
@@ -190,7 +190,7 @@ function newDeck (numberOfCards) {
 	cardHolder2.setAttribute("name", "notFlipped");
 	//add back image to the back
 	cardback.setAttribute("src", "images/back_03.jpg");
-	
+
 	//add objects to board
 	cardHolder.setAttribute("class", "cardHolder");
 	cardBoard.appendChild(cardHolder);
@@ -203,23 +203,23 @@ function newDeck (numberOfCards) {
 //randomly selects cards to be placed on cardBoard
 // so they are in random order
 function randomiseImage () {
-	//cardsAlreadyPlaced is defined globally 
+	//cardsAlreadyPlaced is defined globally
 	//so this method doesn't rewrite it
 
 	//randomise the image to be applied when a new card is called
 	//this is species specific, not an exact match
 	let imageObject;
-	
+
 	const min = 1;
 	const max = newDeckArray.length;
 	let randomNum = Math.floor(Math.random() * max);
-	//TODO check its not a card you already put down	
+	//TODO check its not a card you already put down
 	//check if the number is already in the array
-	for (let i = 0; i < cardsAlreadyPlaced.length; i++) 
+	for (let i = 0; i < cardsAlreadyPlaced.length; i++)
 	{
-		//not looping back through, so if randomNum gets changed 
+		//not looping back through, so if randomNum gets changed
 		//to something lower, it will be successful
-		while (randomNum === cardsAlreadyPlaced[i]) 
+		while (randomNum === cardsAlreadyPlaced[i])
 		{
 			//if it is, change the random number, and reset the for loop
 			randomNum = Math.floor(Math.random() * max);
@@ -237,7 +237,7 @@ function randomiseImage () {
 //finds random pairs of species,
 //pushes object to newDeckArray
 function randomisePairs (randomTypeOfCard) {
-	//create a random set of cards, based on the type 
+	//create a random set of cards, based on the type
 	//of card provided in the newDeck function.
 	let allObjectsOfType = [];
 	//find all object of type and add to new array
@@ -246,12 +246,12 @@ function randomisePairs (randomTypeOfCard) {
 			allObjectsOfType.push(imageObjects[i]);
 		}
 	}
-	
+
 	const min = 0;
 	const max = allObjectsOfType.length;
 	const randomNum1 = Math.floor(Math.random() * max);
 	let randomNum2 = Math.floor(Math.random() * max);
-	//check so that pairs of cards are not the same in 
+	//check so that pairs of cards are not the same in
 	//species mode
 	//if more than one match of same species,
 	//repeat in image may occur.
@@ -279,7 +279,7 @@ function flipCard () {
 	//turn card around to correct URL
 	let cardID = this.getAttribute('cardId');
 	let card = imageObjects[cardID];
-	
+
 	//check if the card has not already been flipped
 	if (this.getAttribute('name') === "notFlipped")
 	{
@@ -319,7 +319,7 @@ function checkForMatch () {
 	//if the local arrays types are equal
 	//if mode is species, only check for type
 	//if mode is exactMatch, check for URL to match
-	if (((cardsInPlay[0].type === cardsInPlay[1].type) && 
+	if (((cardsInPlay[0].type === cardsInPlay[1].type) &&
 		(mode === "species")) ||
 		((cardsInPlay[0].URL === cardsInPlay[1].URL) &&
 		(mode === "exactMatch")))
@@ -331,39 +331,36 @@ function checkForMatch () {
 		for (let i = 0; i < allCards.length; i++) {
 			//of these, which are flipped
 			if (allCards[i].getAttribute("name") === "flipped") {
-				//only affect the cards in the public loop, 
+				//only affect the cards in the public loop,
 				//with the cards in the cardsInPlay array
 				if (allCards[i].getAttribute("cardid") == id0 || allCards[i].getAttribute("cardid") == id1) {
 					//make matched
 					allCards[i].setAttribute("name", "matched");
 					animateMatch(allCards[i]);
 				}
-			} 
+			}
 		}
 
 		correctSound.play();
-		//add score
-		const score = document.getElementById('score');
-		score.innerHTML = parseInt(score.textContent) + 1;
 		let allMatchedCards = [];
 		//check if last match, then Win!
 		for (let i = 0; i < allCards.length; i++) {
-		//check if allcards[i] has the name matched, 
+		//check if allcards[i] has the name matched,
 		//add to an array to check for length
 			if (allCards[i].getAttribute("name") === "matched") {
 				allMatchedCards.push(allCards[i]);
 			}
-		
+
 		}
 		if (allMatchedCards.length === allCards.length) {
 			setTimeout(finishGame, 500);
 			console.log("winner!");
 		}
-		
+
 	}
-	else 
+	else
 	{
-		noMatch();		
+		noMatch();
 	}
 	clearCardsInPlay();
 }
@@ -373,7 +370,7 @@ function clearCardsInPlay () {
 }
 
 function toggleClass(object, className) {
-	if (object.classList.contains(className)) 
+	if (object.classList.contains(className))
 	{
 		object.classList.toggle(className);
 	}
@@ -392,9 +389,9 @@ function noMatch () {
 				//which causes the animations to play at the same time
 				setTimeout(
 					function() {
-						animateFlip(allCards[i])	
+						animateFlip(allCards[i])
 					}, 500);
-				
+
 				//make notFlipped so it can be reset for next match
 				allCards[i].setAttribute('name', "notFlipped");
 				//timeout to let animations complete, then reset all classes
@@ -404,7 +401,7 @@ function noMatch () {
 						toggleClass(allCards[i], "bounce");
 						toggleClass(allCards[i], "shake");
 					}, 1000);
-			} 
+			}
 		}
 }
 
@@ -448,21 +445,18 @@ function clearBoard() {
 }
 
 function resetScores () {
-	//reset scores and moves
-	const score = document.getElementById('score');
-	score.innerHTML = "0";
 	const moves = document.getElementById('moves');
 	moves.innerHTML = "0";
 }
 
 function finishGame () {
 	clearBoard();
-	
-	
+
+
 	//change won games score
 	const wontxt = document.getElementById('won');
 	wontxt.innerHTML = parseInt(wontxt.textContent) + 1;
-	
+
 	//make winner text
 	const winnertxt = document.createElement("div");
 	winnertxt.setAttribute("class", "winnertxt");
@@ -470,8 +464,7 @@ function finishGame () {
 	<span class="winnersmall">
 	Your time was: ${min.textContent}:${sec.textContent}
 	<br>
-	Your score was: ${document.getElementById('score').textContent}
-	<br>
+	Your score was:
 	${document.getElementById("stars").innerHTML}
 	<br>
 	You made ${document.getElementById('moves').textContent} moves
@@ -486,8 +479,8 @@ function finishGame () {
 	winnerImg.setAttribute("class", "winner");
 	cardBoard.appendChild(winnertxt);
 	cardBoard.appendChild(winnerImg);
-	
-	
+
+
 }
 
 // Audio ///////////////////////////////////////////////////////////////////////
@@ -599,6 +592,33 @@ function updateStars () {
 	}
 }
 
+
+// PALETTE //////////////////////////////////////////////////////////////////
+
+document.getElementById("paletteBlack").addEventListener("click", function(){
+	paletteChangeColour("black");
+});
+document.getElementById("paletteYellow").addEventListener("click", function(){
+	paletteChangeColour("yellow");
+});
+document.getElementById("paletteBlue").addEventListener("click", function(){
+	paletteChangeColour("blue");
+});
+
+
+
+function paletteChangeColour (c) {
+	if (c === "black") {
+		document.querySelector("html").setAttribute("class", "black");
+	}
+	else if (c === "yellow") {
+		document.querySelector("html").setAttribute("class", "yellow");
+	}
+	else if (c === "blue") {
+		document.querySelector("html").setAttribute("class", "blue");
+	}
+
+}
 
 // start Game //////////////////////////////////////////////////////////////////
 newDeck(10);

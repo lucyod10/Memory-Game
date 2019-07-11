@@ -1,95 +1,168 @@
+/* colour palette */
+* {
+	font-family: Helvetica, arial, sans-serif;
+	font-weight: bold;
+	letter-spacing: 0.5px;
+	/*box-sizing: border-box;*/
+
+}
+
+  /* background-color: var(--main-bg-color); */
+
 /* general */
 html {
 	scroll-behavior: smooth;
 }
 
+/* default colour theme */
+html {
+	--main-highlight: #ececec;
+	--main-light: #454545;
+	--main-med: #757575;
+	--main-dark: #fff;
+	--main-bg: #111;
+	--main-txt: #ececec;
+	--cardboard-bg: #222;
+}
+
+html.yellow {
+	--main-highlight: #f1d100;
+	--main-light: #c0a604;
+	--main-med: #3f3300;
+	--main-dark: #1a1913;
+	--main-bg: #fad901;
+	--main-txt: #1a1913;
+	--cardboard-bg: #c0a604;
+}
+
+html.blue {
+	--main-highlight: #ffffff;
+	--main-light: #f4faff;
+	--main-med: #41779d;
+	--main-dark: #24323c;
+	--main-bg: #adddff;
+	--main-txt: #24323c;
+	--cardboard-bg: #41779d;
+}
+
+.palette {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.palette div {
+	border-radius: 50%;
+	height: 15px;
+	width: 15px;
+	margin: 10px;
+	cursor: pointer;
+	box-shadow: 0px 0px 7px rgba(255, 255, 255, 0.6);
+}
+
+div .black {
+	background-color: black;
+}
+
+div .yellow {
+	background-color: #fad901;
+}
+
+div .blue {
+	background-color: #adddff;
+}
+
 body {
-	background-color: #131313;
-	font-family: 'Montserrat', sans-serif;
-	color: white;
+	background-color: var(--main-bg);
+	color: var(--main-txt);
 	font-size: 15px;
 	letter-spacing: 2px;
 }
 
+.wrapper {
+	display: grid;
+	grid-template-columns: 30% 70%;
+	text-align: right;
+}
+
 h1 {
-	font-family: 'Montserrat', sans-serif;
 	font-weight: 500;
 	font-size: 37px;
-	text-align: center;
 	padding: 10px 0px 0px 0px;
 	margin: 0 auto;
 	letter-spacing: 2px;
 	text-transform: uppercase;
-	border-bottom: 8px solid #ffcc00;
-	display: inline-block;
+	display: block;
 }
 
 h2 {
-	border-bottom: 8px solid #292929;
-	font-family: 'Montserrat', sans-serif;
 	font-weight: 500;
 	font-size: 24px;
-	text-align: center;
-	padding: 3px 0px 0px 0px;
-	margin: 10px auto;
+	padding: 10px 0px 0px 0px;
+	margin: 0 auto;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	display: inline-block;
+	color: var(--main-light);
 }
 
 .h2 {
-	border-bottom: 5px solid #292929;
-	font-family: 'Montserrat', sans-serif;
 	font-weight: 500;
-	font-size: 20px;
-	text-align: center;
+	font-size: 24px;
+	padding: 10px 0px 0px 0px;
 	margin: 0 auto;
+	margin-bottom: 20px;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	display: inline-block;
-	margin-bottom: 20px;
+	color: var(--main-light);
 }
 
 header {
-	text-align:center;
 	background-color: none;
 	padding: 10px;
-	margin: 0 auto;
 	margin-bottom: 20px;
 }
 
 main {
 	background-color: none;
-	width: calc(50% - 20px);
-	margin: 0 auto;
-	text-align: center;
+	width: 100%;
 }
 
 /* inputs */
 input,
 button {
-	background-color: white;
-	color: #12172f;
+	background-color: var(--main-light);
+	color: var(--main-dark);
 	padding: 8px 12px;
-	font-family: 'Montserrat', sans-serif;
-	border: 1px solid #0c0f1f;
 	font-size: 16px;
 	text-transform: uppercase;
+	border-radius: 5px;
+	border: none;
+}
+
+#reset {
+	background-color: rgba(0, 0, 0, 0);
+	font-size: 20px;
+	color: var(--main-med);
+	cursor: pointer;
+}
+
+input::placeholder {
+	color: var(--main-med);
 }
 
 button {
-	background-color: #ffcc00;
+	background-color: var(--main-light);
 }
 
 input[id="numberOfCards"] {
-	width: 80px;
+	width: 2em;
 	margin: 10px auto;
-
 }
 
 .newGame {
-	border-radius: 20px;
-	background-color: #1b1b1b;
+	background-color: none;
 	width: auto;
 	height: auto;
 	display: inline-block;
@@ -97,10 +170,17 @@ input[id="numberOfCards"] {
 }
 
 .gameStats {
-	font-family: 'Montserrat', sans-serif;
 	font-size: 17px;
 	letter-spacing: 2px;
 	margin: 0;
+}
+
+.statsLabel {
+	font-size: 12px;
+	letter-spacing: 2px;
+	margin: 0;
+	display: block;
+	color: var(--main-light);
 }
 
 #score,
@@ -109,7 +189,9 @@ input[id="numberOfCards"] {
 #timer,
 #stars {
 	font-weight: 700;
-	color: #ffcc00;
+	color: var(--main-dark);
+	display: block;
+	font-size: 25px;
 }
 
 #stars {
@@ -120,7 +202,6 @@ input[id="numberOfCards"] {
 	display: inline-block;
 	position: relative;
 	cursor: pointer;
-	font-family: 'Montserrat', sans-serif;
 	font-size: 17px;
 	user-select: none;
 	padding-left: 30px;
@@ -135,7 +216,7 @@ input[id="numberOfCards"] {
 	display: inline-block;
 	width: 20px;
 	height: 20px;
-	background-color: #292929;
+	background-color: var(--main-light);
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -143,12 +224,12 @@ input[id="numberOfCards"] {
 }
 
 .radiocontainer .highlight {
-	background-color: #ffcc00;
+	background-color: var(--main-med);
 	content: "";
-	height: 18px;
-	width: 18px;
-	left: 1px;
-	top: 1px;
+	height: 14px;
+	width: 14px;
+	left: 3px;
+	top: 3px;
 	transform: translate(-50%, -50%);
 	border-radius: 50%;
 	position: absolute;
@@ -156,23 +237,24 @@ input[id="numberOfCards"] {
 	transition: all 0.2s;
 }
 
-.radiocontainer:hover .highlight {
+.radiocontainer:hover .highlight,
+.radiocontainer input:checked + .highlight {
 	transform: scale(1, 1);
 }
 
 .radiocontainer input:checked + .circle {
-	background-color: #ffcc00;
+	background-color: var(--main-dark);
 }
 
 /* animation */
 @keyframes bloop {
 	0% {
-		background-color: #292929;
+		background-color: var(--main-light);
 		transform: scale(0, 0);
 	}
 
 	100% {
-		background-color: #ffcc00;
+		background-color: var(--main-med);
 		transform: scale(1, 1);
 	}
 }
@@ -300,25 +382,24 @@ input[id="numberOfCards"] {
 }
 
 #cardBoard {
-	background-color: white;
-	margin-top: 70px;
+	background-color: var(--cardboard-bg);
 	display: flex;
 	flex-wrap: wrap;
 	padding: 10px;
 	border-radius: 15px;
 	justify-content: center;
+	margin: 30px;
+	width: calc(100% - 60px);
 }
 
 .winnertxt {
-	color: #131313;
-	font-family: 'Montserrat', sans-serif;
+	color: var(--main-txt);
 	text-transform: uppercase;
 	font-size: 40px;
 }
 
 .winnersmall {
-	color: #131313;
-	font-family: 'Montserrat', sans-serif;
+	color: var(--main-txt);
 	text-transform: uppercase;
 	font-size: 25px;
 }
@@ -344,7 +425,7 @@ input[id="numberOfCards"] {
 }
 
 /* responsive */
-@media screen and (max-width: 1000px) {
+/* @media screen and (max-width: 1000px) {
 	main {
 		width: 60%;
 	}
@@ -382,4 +463,4 @@ input[id="numberOfCards"] {
 	.card {
 		border-radius: 5px;
 	}
-}
+} */

@@ -25,7 +25,7 @@ Made with HTML/CSS, and Javascript.
 
 You can find a demo of the site [here](https://lucyod10.github.io/Memory-Game/)
 
-### Screenshots
+#### Screenshots
 
 ![Screenshot 1](images/screenshot_03.png)
 
@@ -35,10 +35,12 @@ You can find a demo of the site [here](https://lucyod10.github.io/Memory-Game/)
 
 ![Screenshot 4](images/screenshot_01.png)
 
+![Screenshot 5: phone](images/screenshot_phone_combined_01.png)
+
 ## TODO
 
-- fix grid of cards for all numbers and screen resolutions
-- responsive for mobile.
+- Convert card grid to grid from flex, and make responsive for better gameplay at all resolutions.
 - more colour templates
-- colour template palette intersect with header on mobile
-- back of cards match colour palette
+- Fix intersection of colour template palette with header on smaller resolution
+- back of cards match colour palette & nicer design
+- win card redesign

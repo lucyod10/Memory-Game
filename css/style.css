@@ -425,11 +425,7 @@ input[id="numberOfCards"] {
 }
 
 /* responsive */
-/* @media screen and (max-width: 1000px) {
-	main {
-		width: 60%;
-	}
-
+@media screen and (max-width: 1000px) {
 	.card {
 		border-radius: 12px;
 	}
@@ -441,9 +437,6 @@ input[id="numberOfCards"] {
 }
 
 @media screen and (max-width: 700px) {
-	main {
-		width: 70%;
-	}
 
 	.card {
 		border-radius: 9px;
@@ -455,12 +448,13 @@ input[id="numberOfCards"] {
 	}
 }
 
-@media screen and (max-width: 500px) {
-	main {
-		width: 100%;
+@media screen and (max-width: 600px) {
+
+	.wrapper {
+		grid-template-columns: 100%;
 	}
 
 	.card {
 		border-radius: 5px;
 	}
-} */
+}

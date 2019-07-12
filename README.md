@@ -29,13 +29,9 @@ You can find a demo of the site [here](https://lucyod10.github.io/Memory-Game/)
 
 ![Screenshot 1](images/screenshot_03.png)
 
-![Screenshot 2](images/screenshot_04.png)
+![Screenshot 2](images/screenshot_combined_02.png)
 
-![Screenshot 3](images/screenshot_02.png)
-
-![Screenshot 4](images/screenshot_01.png)
-
-![Screenshot 5: phone](images/screenshot_phone_combined_01.png)
+![Screenshot 3](images/screenshot_combined_03.png)
 
 ## TODO
 

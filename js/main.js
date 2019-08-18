@@ -189,7 +189,7 @@ function newDeck (numberOfCards) {
 	cardfront.setAttribute("src", image);
 	cardHolder2.setAttribute("name", "notFlipped");
 	//add back image to the back
-	cardback.setAttribute("src", "images/back_03.jpg");
+	cardback.setAttribute("src", "/images/back_03.jpg");
 
 	//add objects to board
 	cardHolder.setAttribute("class", "cardHolder");
@@ -475,7 +475,7 @@ function finishGame () {
 
 	//make winner image
 	const winnerImg = document.createElement("img");
-	winnerImg.setAttribute("src", "images/happy_01.jpeg");
+	winnerImg.setAttribute("src", "/images/happy_01.jpeg");
 	winnerImg.setAttribute("class", "winner");
 	cardBoard.appendChild(winnertxt);
 	cardBoard.appendChild(winnerImg);

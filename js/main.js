@@ -189,7 +189,7 @@ function newDeck (numberOfCards) {
 	cardfront.setAttribute("src", image);
 	cardHolder2.setAttribute("name", "notFlipped");
 	//add back image to the back
-	cardback.setAttribute("src", "/images/back_03.jpg");
+	cardback.setAttribute("src", "images/back_04.jpg");
 
 	//add objects to board
 	cardHolder.setAttribute("class", "cardHolder");
